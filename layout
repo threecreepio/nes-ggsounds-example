@@ -1,0 +1,19 @@
+MEMORY
+{
+	ZP:             start =     0, size =   $100, fill=no;
+    RAM:            start = $0200, size =   $500, fill=no;
+
+	INES:           start =     0, size =    $10, fill=yes, fillval=$00;
+	CODE:           start = $8000, size =  $7FFA, fill=yes, fillval=$FF;
+	VECTORS:        start = $FFFA, size =     $6, fill=yes, fillval=$FF;
+}
+
+SEGMENTS
+{
+	INES:                  load = INES,          type = ro;
+	CODE:                  load = CODE,          type = ro;
+	VECTORS:               load = VECTORS,       type = ro;
+	
+	ZEROPAGE:              load = ZP,    type = zp,  optional = yes;
+	BSS:                   load = RAM,   type = bss, optional = yes;
+}
